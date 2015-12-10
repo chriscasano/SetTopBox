@@ -47,7 +47,9 @@ SOLR Setup
 
      curl "http://127.0.0.1:8983/solr/admin/cores?action=CREATE&name=settopbox&instanceDir=/opt/lucidworks-hdpsearch/solr/server/solr/settopbox&configSet=data_driven_schema_configs"
 
-10) In Banana dashboard ( http://127.0.0.1:8983/solr/banana/index.html#/dashboard ), load the "Set Top Box Events - ##########" file in /root/settopbox/banana directory
+Make sure a response status of 0 is returned.
+
+10) In Banana dashboard ( http://127.0.0.1:8983/solr/banana/index.html#/dashboard ), load the "Set Top Box Events - ##########" file in /root/SetTopBox/banana directory
 
 11) In banana dashboard settings (gear box in upper right), make sure SOLR config has server = “/solr/“ and collection = “settopbox"
 
