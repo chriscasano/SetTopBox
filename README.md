@@ -1,8 +1,14 @@
-# SetTopBox
+# Set Top Box Demonstration 
 
-<b>Setup</b>
+This demonstration simulates real time set top box data capture with simple event processing and real time search & discovery.
 
-1) Get Sandbox
+<i>Products used: Java, Kafka, SOLR/Banana, NiFi</i>
+
+-----------
+Setup
+-----------
+
+1) Get Hortonworks Sandbox
      Make sure Kafka port is setup in port fowarding of VM.  should be 6667
      
 2) Install NiFi (https://github.com/abajwa-hw/ambari-nifi-service)
@@ -27,7 +33,7 @@
      settopboxdemo.data.output.events=/root/settopbox/input_test.txt
 
 ----------------
--- NIFI Setup --
+NIFI Setup
 ----------------
 
 7) Load NiFi settopbox template into NiFi.  File is located in /root/settopbox/nifi/NiFi_SetTopBox.xml.  
@@ -35,7 +41,7 @@
 8) Once loaded, start NiFi processors.
 
 ----------------
--- SOLR Setup --
+SOLR Setup
 ----------------
 
 9) Create settopbox SOLR index: 
@@ -47,7 +53,7 @@
 11) In banana dashboard settings (gear box in upper right), make sure SOLR config has server = “/solr/“ and collection = “settopbox"
 
 -----------------
--- Kafka Setup --
+Kafka Setup 
 -----------------     
 
 12) Create settopbox topic
@@ -55,14 +61,16 @@
      kafka-topics.sh --create settopbox ....
 
 -----------------
--- Create Data --
+Create Data
 -----------------     
 
 13) From /root/settopbox, run the following.  This should create an input_text.txt file in /root/settopbox with some sample set top box data/
 
      java -cp SetTopBox.jar com.hortonworks.settopboxdemo.DataGenerator DemoData.properties
 
+---------------
 <b>Run Demo</b>
+--------------
 
 The run the demo, the MessageSender class in the SetTopBox jar will incrementatlly push records into Kafka, thru Nifi and ultimately land in SOLR.  MessageSender simulates a set top box end point, Kafka is obviously the message broker, NiFi is the router of these data streams into SOLR were real time event analytics can be visualized and searched upon.
 
