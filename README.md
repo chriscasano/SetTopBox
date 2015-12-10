@@ -51,6 +51,9 @@ Make sure a response status of 0 is returned.
 
 10) In Banana dashboard ( http://127.0.0.1:8983/solr/banana/index.html#/dashboard ), load the "Set Top Box Events - ##########" file in /root/SetTopBox/banana directory
 
+     cp /root/SetTopBox/banana/SetTopBox_Dashboard.json /opt/lucidworks-hdpsearch/solr/server/solr-webapp/webapp/banana/app/dashboards/
+     chmod 765 /opt/lucidworks-hdpsearch/solr/server/solr-webapp/webapp/banana/app/dashboards/SetTopBox_Dashboard.json
+
 11) In banana dashboard settings (gear box in upper right), make sure SOLR config has server = “/solr/“ and collection = “settopbox"
 
 -----------------
