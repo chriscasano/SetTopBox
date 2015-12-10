@@ -17,20 +17,19 @@ Setup
 
      ./start_solr.sh
 
-4) Create /root/settopbox directory
+4) Clone this repository in /root
 
-     mkdir settopbox
-     cd settopbox
+     git clone https://github.com/chriscasano/SetTopBox.git
 
-5) Get settopbox repository
+5) Change directory into the repo
 
-     git@github.com:chriscasano/SetTopBox.git
+     cd SetTopBox
 
-6) If not using /root/settopbox as primary directory; update DemoData.properties file.
+6) If not using /root/SetTopBox as primary directory; update DemoData.properties file.
 
-     settopboxdemo.data.input.program_guide=/root/settopbox/DemoData_ProgramGuide.csv
-     settopboxdemo.kafka.input_file=/root/settopbox/input_test.txt
-     settopboxdemo.data.output.events=/root/settopbox/input_test.txt
+     settopboxdemo.data.input.program_guide=/root/SetTopBox/DemoData_ProgramGuide.csv
+     settopboxdemo.kafka.input_file=/root/SetTopBox/input_test.txt
+     settopboxdemo.data.output.events=/root/SetTopBox/input_test.txt
 
 ----------------
 NIFI Setup
