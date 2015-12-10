@@ -2,10 +2,19 @@
 
 1) Get Sandbox
      Make sure Kafka port is setup in port fowarding of VM.  should be 6667
+     
 2) Install NiFi (https://github.com/abajwa-hw/ambari-nifi-service)
+
 3) Start SOLR from /root ./start_solr.sh
+
 4) Create /root/settopbox directory
+
+     mkdir settopbox
+
 5) Copy Jars/Config to VM: scp SettopBoxDemo_Utils.jar, DemoData.properties and DemoData_ProgramGuide.csv to /root/settopbox
+
+     
+
 6) update DemoData.properties file:  Switch paths to /root/settopbox/
      settopboxdemo.data.input.program_guide=/root/settopbox/DemoData_ProgramGuide.csv
      settopboxdemo.kafka.input_file=/root/settopbox/input_test.txt
