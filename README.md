@@ -11,7 +11,7 @@ Setup
 1) Get Hortonworks Sandbox
      Make sure Kafka port is setup in port fowarding of VM.  should be 6667
      
-2) Install NiFi (https://github.com/abajwa-hw/ambari-nifi-service)
+2) Install NiFi (https://github.com/abajwa-hw/ambari-nifi-service).  If you're using VirtualBox, make sure you port forward 9090 when your install is complete. 
 
 3) Start SOLR from /root 
 
@@ -36,7 +36,7 @@ Setup
 NIFI Setup
 ----------------
 
-7) Load NiFi settopbox template into NiFi.  File is located in /root/settopbox/nifi/NiFi_SetTopBox.xml.  
+7) Load NiFi settopbox template into NiFi.  File is located in /root/settopbox/nifi/NiFi_SetTopBox.xml.  Load the template from the NiFi UI and then drag the SetTopBox template onto the canvas.
 
 8) Once loaded, start NiFi processors.
 
