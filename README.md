@@ -1,29 +1,75 @@
 # SetTopBox
 
+<b>Setup</b>
+
 1) Get Sandbox
      Make sure Kafka port is setup in port fowarding of VM.  should be 6667
      
 2) Install NiFi (https://github.com/abajwa-hw/ambari-nifi-service)
 
-3) Start SOLR from /root ./start_solr.sh
+3) Start SOLR from /root 
+
+     ./start_solr.sh
 
 4) Create /root/settopbox directory
 
      mkdir settopbox
+     cd settopbox
 
-5) Copy Jars/Config to VM: scp SettopBoxDemo_Utils.jar, DemoData.properties and DemoData_ProgramGuide.csv to /root/settopbox
+5) Get settopbox repository
 
-     
+     git@github.com:chriscasano/SetTopBox.git
 
-6) update DemoData.properties file:  Switch paths to /root/settopbox/
+6) If not using /root/settopbox as primary directory; update DemoData.properties file.
+
      settopboxdemo.data.input.program_guide=/root/settopbox/DemoData_ProgramGuide.csv
      settopboxdemo.kafka.input_file=/root/settopbox/input_test.txt
      settopboxdemo.data.output.events=/root/settopbox/input_test.txt
-7) Create settopbox index: curl "http://127.0.0.1:8983/solr/admin/cores?action=CREATE&name=settopbox&instanceDir=/opt/lucidworks-hdpsearch/solr/server/solr/settopbox&configSet=hdp"
-8) Load NiFi template (NiFi_SetTopBox.xml)
-9) In banana dashboard, load the "Set Top Box Events - ##########" file
-10) In banana dashboard settings (gear box in upper right), make sure SOLR config has server = “/solr/“ and collection = “settopbox"
-11) Start NiFi processors
-12) Run
-java -cp SettopBoxDemo_Utils.jar com.hortonworks.settopboxdemo.DataGenerator DemoData.properties
-java -cp SettopBoxDemo_Utils.jar com.hortonworks.settopboxdemo.MessageSender DemoData.properties
+
+----------------
+-- NIFI Setup --
+----------------
+
+7) Load NiFi settopbox template into NiFi.  File is located in /root/settopbox/nifi/NiFi_SetTopBox.xml.  
+
+8) Once loaded, start NiFi processors.
+
+----------------
+-- SOLR Setup --
+----------------
+
+9) Create settopbox SOLR index: 
+
+     curl "http://127.0.0.1:8983/solr/admin/cores?action=CREATE&name=settopbox&instanceDir=/opt/lucidworks-hdpsearch/solr/server/solr/settopbox&configSet=data_driven_schema_configs"
+
+10) In Banana dashboard ( http://127.0.0.1:8983/solr/banana/index.html#/dashboard ), load the "Set Top Box Events - ##########" file in /root/settopbox/banana directory
+
+11) In banana dashboard settings (gear box in upper right), make sure SOLR config has server = “/solr/“ and collection = “settopbox"
+
+-----------------
+-- Kafka Setup --
+-----------------     
+
+12) Create settopbox topic
+
+     kafka-topics.sh --create settopbox ....
+
+-----------------
+-- Create Data --
+-----------------     
+
+13) From /root/settopbox, run the following.  This should create an input_text.txt file in /root/settopbox with some sample set top box data/
+
+     java -cp SetTopBox.jar com.hortonworks.settopboxdemo.DataGenerator DemoData.properties
+
+<b>Run Demo</b>
+
+The run the demo, the MessageSender class in the SetTopBox jar will incrementatlly push records into Kafka, thru Nifi and ultimately land in SOLR.  MessageSender simulates a set top box end point, Kafka is obviously the message broker, NiFi is the router of these data streams into SOLR were real time event analytics can be visualized and searched upon.
+
+     java -cp SetTopBox.jar com.hortonworks.settopboxdemo.MessageSender DemoData.properties
+
+--- EXTRAS ---
+
+If you need to delete the SOLR index, run the following commands: 
+
+     curl "http://localhost:8983/solr/admin/cores?action=UNLOAD&core=settopbox&deleteIndex=true"
