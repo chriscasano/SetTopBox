@@ -4,6 +4,8 @@ This demonstration simulates real time set top box data capture with simple even
 
 <i>Products used: Java, Kafka, SOLR/Banana, NiFi</i>
 
+![alt tag](img/dashboard.png)
+
 -----------
 Setup
 -----------
