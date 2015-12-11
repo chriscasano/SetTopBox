@@ -15,6 +15,8 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Properties;
 import java.util.Random;
+import java.util.Calendar;
+import java.text.SimpleDateFormat;
 
 public class DataGenerator {
 	private static final String START_EVENT_ID = "settopboxdemo.events.starting_event_id";
@@ -145,8 +147,10 @@ public class DataGenerator {
 				} else {
 					long_timestamp = Long.parseLong(program[2]);
 				}
-				
-				String event_string = "{\"event_id_s\":\"" + id
+
+				//String timeStamp = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(Calendar.getInstance().getTime());
+
+				String event_string = "{\"id\":\"" + id
                         + "\",\"channel_s\":\"" + program[3]
                         + "\",\"gmt_offset_s\":\"" + user[3]
 						+ "\",\"src_tl\":\"" + long_timestamp
@@ -156,7 +160,11 @@ public class DataGenerator {
 						+ "\",\"zip_code_s\":\"" + user[2]
                         + "\",\"network_s\":\"" + program[4]
                         + "\",\"state_s\":\"" + user[5]
-                        + "\",\"latlong_p\":\"" + user[4]  + "\"}";
+                        + "\",\"latlong_p\":\"" + user[4]
+						+ "\",\"uptimedays_i\":\"" + getRandomNumber(120)
+						+ "\",\"event_dt\":\"" //+ timeStamp
+						//+ "\"}"
+						;
 				System.out.println(event_string);
 				alEvents.add(event_string);
 				hsExcludeList.add(check);

@@ -8,6 +8,8 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Properties;
 
 public class MessageSender {
@@ -76,8 +78,9 @@ public class MessageSender {
 			//Read File Line By Line
 			while ((strLine = br.readLine()) != null)   {
 			  // Print the content on the console
-				System.out.println(strLine);
-				KeyedMessage<String, String> keyedMessage = new KeyedMessage<String, String>(topic, strLine);
+				String timeStamp = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'").format(Calendar.getInstance().getTime());
+				System.out.println(strLine + timeStamp + "\"}");
+				KeyedMessage<String, String> keyedMessage = new KeyedMessage<String, String>(topic, strLine + timeStamp + "\"}");
 				producer.send(keyedMessage);
 				if (this.millisecond_delay > 0) {
 					Thread.sleep(millisecond_delay);
