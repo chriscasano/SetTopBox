@@ -10,7 +10,7 @@ This demonstration simulates real time set top box data capture with simple even
 Setup
 -----------
 
-1) Get Hortonworks Sandbox
+1) Get Hortonworks Sandbox: http://hortonworks.com/products/hortonworks-sandbox/
      
 2) Install NiFi (https://github.com/abajwa-hw/ambari-nifi-service).  If you're using VirtualBox, make sure you port forward 9090 when your install is complete. 
 
