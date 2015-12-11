@@ -72,7 +72,7 @@
             "5y"
           ],
           "timespan": "12h",
-          "timefield": "event_timestamp",
+          "timefield": "event_dt",
           "timeformat": "",
           "refresh": {
             "enable": false,
@@ -339,7 +339,7 @@
           "type": "histogram",
           "loadingEditor": false,
           "mode": "values",
-          "time_field": "event_timestamp",
+          "time_field": "event_dt",
           "queries": {
             "mode": "all",
             "ids": [
@@ -553,7 +553,7 @@
             "channel",
             "device_id",
             "event_id",
-            "event_timestamp",
+            "event_dt",
             "gmt_offset",
             "id",
             "market",
